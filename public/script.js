@@ -9,7 +9,7 @@ function renderFilteredProducts(products) {
     const ul = document.createElement('ul');
     products.forEach(product => {
         const li = document.createElement('li');
-        li.innerHTML = `${product.name} - ${product.category} - $${product.price}` + " <a href='javascript: selectItem(" + product._id + ")'>Select Item</a>";
+        li.innerHTML = `${product.name} - ${product.category} - $${product.price}` + " <a href='javascript: selectItem(" + product._id + ")'>Comprar</a>";
         ul.appendChild(li);
     });
     filteredProductsDiv.appendChild(ul);

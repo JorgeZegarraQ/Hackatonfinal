@@ -1,12 +1,11 @@
-/**
- * Created by sonu on 11/7/17.
- */
+
 $(function () {
     var textfield = $("input[name=user]");
     var passwordfield = $("input[name=password]");
     $('button[type="submit"]').click(function (e) {
         e.preventDefault();
-        //little validation just to check username
+        
+        // check username
         if (textfield.val() != "" && passwordfield.val() != "") {
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "http://localhost:8000/login")

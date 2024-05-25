@@ -1,6 +1,3 @@
-/**
- * Created by sonu on 11/7/17.
- */
 
 var productlist = []
 var total = 0;
@@ -37,6 +34,8 @@ $(function () {
             //         savePurchase();
             //     }
             // });
+            
+            savePurchase();
 
             xhr.onload = () => {
                 if (xhr.readyState == 4 && xhr.status == 201) {
@@ -48,7 +47,7 @@ $(function () {
             };
 
             xhr.open("POST", "https://secure.culqi.com/v2/tokens");
-            xhr.setRequestHeader("Authorization", "Bearer pk_test_27f4fbc0ddc64976");
+            xhr.setRequestHeader("Authorization", "Bearer pk_test_");
             xhr.setRequestHeader("content-type", "application/json");
 
             xhr.send(data);

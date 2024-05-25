@@ -29,27 +29,7 @@ async function main() {
     // console.table(products);
     console.log("Connected to MongoDB!");
 
-    app.post('/savepurchase', async (req, res) => {
-      console.log(req.body);
-      try {
-        const doc = { user: req.body.userid, total: req.body.total, products: req.body.products };
-        const result = await purchaseCollection.insertOne(doc);
-
-        if (result) {
-          const query = { userid: req.body.userid };
-          const result = await cartCollection.deleteOne(query);
-          if (result.deletedCount === 1) {
-            console.log("Successfully cleared cart.");
-          } else {
-            console.log("No cart matches found.");
-          }
-        }
-
-        
-      } catch (err) {
-        res.status(500).json({ message: err.message });
-      }
-    });
+   
     app.post('/updatecart', async (req, res) => {
       console.log(req.body);
       try {
@@ -61,7 +41,7 @@ async function main() {
             products: req.body.products,
           },
         };
-        const result = await cartCollection.updateOne(filter, updateDoc, options);
+        const result = await cartCollection.updateMany(filter, updateDoc, options);
         if (result) {
           res.json({
             success: true,
@@ -129,7 +109,6 @@ async function main() {
     });
     // Ruta para la página de inicio (listado de productos)
     app.get('/api/products', async (req, res) => {
-      console.log("/api/products is being called, yay!");
       console.log(req.body);
       try {
         const products = await productsCollection.find({}).toArray();
@@ -163,5 +142,27 @@ async function main() {
     console.error("Failed to connect to MongoDB", err);
   }
 }
+
+app.post('/savepurchase', async (req, res) => {
+  console.log(req.body);
+  try {
+    const doc = { user: req.body.userid, total: req.body.total, products: req.body.products };
+    const result = await purchaseCollection.insertOne(doc);
+
+    if (result) {
+      const query = { userid: req.body.userid };
+      const result = await cartCollection.deleteOne(query);
+      if (result.deletedCount === 1) {
+        console.log("Successfully cleared cart.");
+      } else {
+        console.log("No cart matches found.");
+      }
+    }
+
+    
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 main().catch(console.dir);

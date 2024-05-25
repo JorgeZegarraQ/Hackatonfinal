@@ -4,22 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu Tienda</title>
+    <link rel="icon" type="image/png" href="/icono.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            background-color: #444;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #filteredProducts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 20px;
+            justify-content: center;
+        }
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="script.js" type="text/javascript"></script>
-
 </head>
 <body>
-    <a href="login.html">Log In</a>
-    <a href="signup.html">Sign Up</a>
-    <a href="payment.html">Proceed to Pay</a>
-    <h1> Bienvenido a Mi Tienda </h1>
-    <i id="loggedinuser"></i>
-    <br>
+    <header>
+        <h1>Your Store</h1>
+        <nav>
+            <a href="login.html">Log In</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="payment.html">Proceed to Pay</a>
+        </nav>
+    </header>
 
-    <input type="text" id="searchInput" placeholder="Buscar productos...">
-    <button onclick="searchProducts()">Buscar</button>
+    <h3>Welcome Back!</h3><h3 id="loggedinuser"></h3><br>
 
-    <div id="filteredProducts"></div>
+    <div class="container">
+        <input type="text" id="searchInput" placeholder="Buscar productos...">
+        <button onclick="searchProducts()">Buscar</button>
+        
+        <div id="filteredProducts">
+            <!-- Aquí se mostrarán los productos filtrados -->
+        </div>
+        
+        <h2>Carrito de Compras</h2>
+        <ul id="cartItems"></ul>
+        <button onclick="checkout()">Checkout</button>
+    </div>
 
+    <div class="container">
+        <input type="text" id="searchInput" placeholder="Buscar productos...">
+        <button onclick="searchProducts()">Buscar</button>
+        
+        <div id="filteredProducts">
+            <!-- Aquí se mostrarán los productos filtrados -->
+        </div>
+    </div>
 </body>
 </html>
