@@ -1,5 +1,6 @@
 fetchProducts()
 var productlist = []
+var shoppingcart = []
 
 // Función para mostrar los productos filtrados en el div
 function renderFilteredProducts(products) {
@@ -8,16 +9,50 @@ function renderFilteredProducts(products) {
     const ul = document.createElement('ul');
     products.forEach(product => {
         const li = document.createElement('li');
-        li.innerHTML = `${product.name} - ${product.category} - $${product.price}` + " <a href='selectItem("+product._id+")'>Select Item</a>";        
+        li.innerHTML = `${product.name} - ${product.category} - $${product.price}` + " <a href='javascript: selectItem(" + product._id + ")'>Select Item</a>";
         ul.appendChild(li);
     });
     filteredProductsDiv.appendChild(ul);
 }
 
-function selectItem(id){
-    const filteredProducts = productlist.filter(product =>
-        product._id.toLowerCase().includes(id)
-    );
+function selectItem(id) {
+    var user = sessionStorage.getItem("user");
+    if (user) {
+        user = JSON.parse(user)
+
+        const filteredProducts = productlist.filter(product =>
+            product._id == id
+        )[0];
+        if (filteredProducts) {
+            let quantity = prompt("How much quantity do you want", "1")
+
+            if (quantity) {
+                var parsedquantity = parseFloat(quantity)
+                if (parsedquantity) {
+                    shoppingcart.push({
+                        productid: filteredProducts._id,
+                        quantity: parsedquantity
+                    })
+                    var cart = {
+                        userid: user._id,
+                        products: shoppingcart
+                    }
+                    serverCall("/updatecart", cart, updateCartDisplay, "POST")
+                }
+                else {
+                    alert("Invalid Quantity")
+                }
+            }
+        }
+    }
+    else {
+        alert("Please log in")
+    }
+
+}
+
+function updateCartDisplay() {
+
 }
 
 // Función para filtrar productos según el término de búsqueda
@@ -37,12 +72,12 @@ async function searchProducts() {
 // Simulación de la función fetchProducts (reemplaza esto con tu lógica real)
 async function fetchProducts() {
     // Simulamos una solicitud a un servidor para obtener los productos
-    return serverCall("/api/products", {}, saveProducts)
+    return serverCall("/api/products", {}, saveProducts, "GET")
 }
 
-async function serverCall(path, body, callback) {
+async function serverCall(path, body, callback, type) {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:3000" + path)
+    xhr.open(type, "http://localhost:3000" + path)
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
 
     xhr.onload = () => {
@@ -53,7 +88,7 @@ async function serverCall(path, body, callback) {
             console.log(JSON.stringify(xhr.status));
         }
     };
-    xhr.send(body);
+    xhr.send(JSON.stringify(body));
 }
 
 function saveProducts(results) {
@@ -65,11 +100,18 @@ $(document).ready(function () {
     var results = fetchProducts()
 
     var user = sessionStorage.getItem("user");
-    if(user){
+    if (user) {
         user = JSON.parse(user)
         const loggedinuserdisplay = document.getElementById('loggedinuser');
         loggedinuserdisplay.textContent = `${user.user}`;
-        
+
+
+        var cart = sessionStorage.getItem("cart");
+        if (cart) {
+            cart = JSON.parse(cart)
+            shoppingcart = cart.products
+        }
+
     }
 
 });

@@ -22,6 +22,7 @@ $(function () {
                     if(response.success){
                         alert(response.message)
                         sessionStorage.setItem("user", JSON.stringify(response.user));
+                        sessionStorage.setItem("cart", JSON.stringify(response.cart));
                         window.location.replace("index.html")
                     }
                     else{

@@ -22,13 +22,39 @@ async function main() {
     const database = client.db('Productos');
     const productsCollection = database.collection('Hackaton');
     const usersCollection = database.collection('Users');
+    const cartCollection = database.collection('Cart');
 
     // const products = await productsCollection.find({}).toArray();
     // console.table(products);
     console.log("Connected to MongoDB!");
 
+    app.post('/updatecart', async (req, res) => {
+      console.log(req.body);
+      try {
+        const options = { upsert: true };
+        const filter = { userid: req.body.userid };
+        const updateDoc = {
+          $set: {
+            userid: req.body.userid,
+            products: req.body.products,
+          },
+        };
+        const result = await cartCollection.updateOne(filter, updateDoc, options);
+        if (result) {
+          res.json({
+            success: true,
+            message: "Updated cart!",
+            cart: result,
+          });
+        }
+        else {
+          res.json("Failed to update cart");
+        }
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+    });
     app.post('/signup', async (req, res) => {
-
       console.log(req.body);
       try {
         const user = await usersCollection.findOne({ user: req.body.user });
@@ -47,6 +73,7 @@ async function main() {
             success: true,
             message: "User Created Successfully",
             user: result,
+            cart: undefined
           });
         }
       } catch (err) {
@@ -54,16 +81,21 @@ async function main() {
       }
     });
     app.post('/login', async (req, res) => {
-
       console.log(req.body);
       try {
         const user = await usersCollection.findOne({ user: req.body.user, password: req.body.password });
         console.log(user);
         if (user) {
+          // const cart = await cartCollection.findOne({ userid: JSON.stringify(user._id) });
+          const carts = await cartCollection.find({}).toArray();
+          const cart = carts.filter(function (temp) {
+            return JSON.stringify(temp["userid"]) == JSON.stringify(user._id)
+          })[0]
           res.json({
             success: true,
             message: "Success!",
             user: user,
+            cart: cart
           });
         }
         else {
