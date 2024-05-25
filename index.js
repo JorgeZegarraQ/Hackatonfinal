@@ -3,7 +3,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 const uri = process.env.MONGO_URI || "mongodb+srv://jorgeliusps:69PKgdm6@cluster0.wqmkdbz.mongodb.net/?retryWrites=true&w=majority&appName=Hackaton";
 const client = new MongoClient(uri, {
   serverApi: {
