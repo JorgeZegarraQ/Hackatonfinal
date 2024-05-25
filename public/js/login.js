@@ -9,7 +9,7 @@ $(function () {
         //little validation just to check username
         if (textfield.val() != "" && passwordfield.val() != "") {
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:3000/login")
+            xhr.open("POST", "http://localhost:8000/login")
             xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
             const body = JSON.stringify({
                 "user": textfield.val(),

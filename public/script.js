@@ -77,7 +77,7 @@ async function fetchProducts() {
 
 async function serverCall(path, body, callback, type) {
     const xhr = new XMLHttpRequest();
-    xhr.open(type, "http://localhost:3000" + path)
+    xhr.open(type, "http://localhost:8000" + path)
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
 
     xhr.onload = () => {
