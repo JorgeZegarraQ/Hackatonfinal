@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Tienda</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Tienda</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js" type="text/javascript"></script>
+
 </head>
 <body>
-  <h1>Bienvenido a Mi Tienda</h1>
-  <div id="products-container"></div>
-  <script src="script.js"></script>
+    <a href="login.html">Log In</a>
+    <a href="signup.html">Sign Up</a>
+    <h1> Bienvenido a Mi Tienda </h1>
+    <i id="loggedinuser"></i>
+    <br>
+
+    <input type="text" id="searchInput" placeholder="Buscar productos...">
+    <button onclick="searchProducts()">Buscar</button>
+
+    <div id="filteredProducts"></div>
+
 </body>
 </html>

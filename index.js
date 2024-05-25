@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const uri = process.env.MONGO_URI || "mongodb+srv://jorgeliusps:69PKgdm6@cluster0.wqmkdbz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MONGO_URI || "mongodb+srv://jorgeliusps:69PKgdm6@cluster0.wqmkdbz.mongodb.net/?retryWrites=true&w=majority&appName=Hackaton";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -14,17 +14,69 @@ const client = new MongoClient(uri, {
 });
 
 app.use(express.json());
+app.use(express.static('public')); // Servir archivos estáticos desde la carpeta 'public'
 
 async function main() {
   try {
     await client.connect();
-    const database = client.db('test');
-    const productsCollection = database.collection('products');
-    
+    const database = client.db('Productos');
+    const productsCollection = database.collection('Hackaton');
+    const usersCollection = database.collection('Users');
+
+    // const products = await productsCollection.find({}).toArray();
+    // console.table(products);
     console.log("Connected to MongoDB!");
 
+    app.post('/signup', async (req, res) => {
+
+      console.log(req.body);
+      try {
+        const user = await usersCollection.findOne({ user: req.body.user });
+        console.log(user);
+        if (user) {
+          res.json({
+            success: false,
+            message: "User Already exists",
+            user: user,
+          });
+        }
+        else {
+          const doc = { user: req.body.user, password: req.body.password };
+          const result = await usersCollection.insertOne(doc);
+          res.json({
+            success: true,
+            message: "User Created Successfully",
+            user: result,
+          });
+        }
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+    });
+    app.post('/login', async (req, res) => {
+
+      console.log(req.body);
+      try {
+        const user = await usersCollection.findOne({ user: req.body.user, password: req.body.password });
+        console.log(user);
+        if (user) {
+          res.json({
+            success: true,
+            message: "Success!",
+            user: user,
+          });
+        }
+        else {
+          res.json("Invalid User/Password!");
+        }
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+    });
     // Ruta para la página de inicio (listado de productos)
     app.get('/api/products', async (req, res) => {
+      console.log("/api/products is being called, yay!");
+      console.log(req.body);
       try {
         const products = await productsCollection.find({}).toArray();
         res.json(products);
