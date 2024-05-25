@@ -23,11 +23,33 @@ async function main() {
     const productsCollection = database.collection('Hackaton');
     const usersCollection = database.collection('Users');
     const cartCollection = database.collection('Cart');
+    const purchaseCollection = database.collection('Purchases');
 
     // const products = await productsCollection.find({}).toArray();
     // console.table(products);
     console.log("Connected to MongoDB!");
 
+    app.post('/savepurchase', async (req, res) => {
+      console.log(req.body);
+      try {
+        const doc = { user: req.body.userid, total: req.body.total, products: req.body.products };
+        const result = await purchaseCollection.insertOne(doc);
+
+        if (result) {
+          const query = { userid: req.body.userid };
+          const result = await cartCollection.deleteOne(query);
+          if (result.deletedCount === 1) {
+            console.log("Successfully cleared cart.");
+          } else {
+            console.log("No cart matches found.");
+          }
+        }
+
+        
+      } catch (err) {
+        res.status(500).json({ message: err.message });
+      }
+    });
     app.post('/updatecart', async (req, res) => {
       console.log(req.body);
       try {

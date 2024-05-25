@@ -82,7 +82,6 @@ async function serverCall(path, body, callback, type) {
 
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log(JSON.parse(xhr.responseText));
             callback(JSON.parse(xhr.responseText))
         } else {
             console.log(JSON.stringify(xhr.status));
