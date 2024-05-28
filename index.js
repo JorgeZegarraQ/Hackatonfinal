@@ -20,13 +20,13 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.log(err));
 
 // Rutas
-// const cartRoutes = require('./routes/cart.routes');
+const cartRoutes = require('./routes/cart.routes');
 // const couponRoutes = require('./routes/coupon.routes');
 // const paymentRoutes = require('./routes/payment.routes');
 const productsRoutes = require('./routes/products.routes');
 // const transactionsRoutes = require('./routes/transactions.routes');
 const usersRoutes = require('./routes/users.routes');
-// app.use('/api/cart', cartRoutes);
+app.use('/api/cart', cartRoutes);
 // app.use('/api/coupon', couponRoutes);
 // app.use('/api/payment', paymentRoutes);
 app.use('/api/products', productsRoutes);
