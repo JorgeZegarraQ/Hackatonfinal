@@ -5,6 +5,6 @@ const { protect } = require('../middleware/auth.middleware');
 
 router.post('/add', protect, cartController.addToCart);
 router.post('/remove', protect, cartController.removeFromCart);
-router.post('/apply-coupon', protect, cartController.applyCoupon);
+router.post('/applycoupon', protect, cartController.applyCoupon);
 
 module.exports = router;

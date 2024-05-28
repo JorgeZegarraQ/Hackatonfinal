@@ -1,0 +1,500 @@
+{
+	"info": {
+		"_postman_id": "c3386ae8-a4f8-4b04-b105-acc3cda63901",
+		"name": "Hackaton Final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35067216",
+		"_collection_link": "https://me6666-2461.postman.co/workspace/Me-Workspace~35119a79-ad67-4374-ba5a-15e1065ebe09/collection/35067216-c3386ae8-a4f8-4b04-b105-acc3cda63901?action=share&source=collection_link&creator=35067216"
+	},
+	"item": [
+		{
+			"name": "Api para obtener productos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/allproducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"allproducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para filtrar productos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\": \"Ropa\",\r\n    \"priceRange\": \"30-80\",\r\n    \"search\": \"jeans\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/filterproducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"filterproducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para crear user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"Yorch\",\r\n   \"email\": \"jorgezq@hotmail.com\",\r\n   \"password\": \"test123\",\r\n   \"isAdmin\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"email\": \"jorgezq@hotmail.com\",\r\n   \"password\": \"test123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para crear producto \"Usuario no autorizado\"",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"teclado\",\r\n    \"description\":\"Teclado logitech 502\",\r\n    \"category\": \"Tech\",\r\n    \"price\": \"39.99\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/createproduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"createproduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para crear producto \"Usuario autorizado\"",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTUyYzk5OTczMjBiMzc0ZjVjOTExMyIsImlhdCI6MTcxNjg1ODAxMCwiZXhwIjoxNzE5NDUwMDEwfQ.XXmjh7THjh2cP4MstlDFm_p-KM7QhoJnUmekReRjqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mouse\",\r\n    \"description\":\"Mouse logitech 502\",\r\n    \"category\": \"Tech\",\r\n    \"price\": \"59.99\",\r\n    \"upc\": 123\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/createproduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"createproduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para eliminar producto \"Usuario autorizado\"",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTUyYzk5OTczMjBiMzc0ZjVjOTExMyIsImlhdCI6MTcxNjg1ODAxMCwiZXhwIjoxNzE5NDUwMDEwfQ.XXmjh7THjh2cP4MstlDFm_p-KM7QhoJnUmekReRjqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"upc\": 123\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/deleteproduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"deleteproduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para actualizar producto \"Usuario autorizado\"",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTUyYzk5OTczMjBiMzc0ZjVjOTExMyIsImlhdCI6MTcxNjg1ODAxMCwiZXhwIjoxNzE5NDUwMDEwfQ.XXmjh7THjh2cP4MstlDFm_p-KM7QhoJnUmekReRjqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"upc\": 123,\r\n    \"name\": \"testing!\",\r\n    \"price\": 3498573\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/updateproduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"updateproduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para crear productos en el cart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTUyYzk5OTczMjBiMzc0ZjVjOTExMyIsImlhdCI6MTcxNjg1ODAxMCwiZXhwIjoxNzE5NDUwMDEwfQ.XXmjh7THjh2cP4MstlDFm_p-KM7QhoJnUmekReRjqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"66552aa6f43e1cac8f88a7c2\",\r\n    \"product\": \"66542c67bdd6c6f0194a38c4\",\r\n    \"quantity\": 3\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/cart/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cart",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para eliminar productos en el cart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTUyYzk5OTczMjBiMzc0ZjVjOTExMyIsImlhdCI6MTcxNjg1ODAxMCwiZXhwIjoxNzE5NDUwMDEwfQ.XXmjh7THjh2cP4MstlDFm_p-KM7QhoJnUmekReRjqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"66552aa6f43e1cac8f88a7c2\",\r\n    \"product\": \"66542c67bdd6c6f0194a38c4\",\r\n    \"quantity\": 2\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/cart/remove",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cart",
+						"remove"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para aplicar coupon en el cart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTUyYzk5OTczMjBiMzc0ZjVjOTExMyIsImlhdCI6MTcxNjg1ODAxMCwiZXhwIjoxNzE5NDUwMDEwfQ.XXmjh7THjh2cP4MstlDFm_p-KM7QhoJnUmekReRjqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"66552aa6f43e1cac8f88a7c2\",\r\n    \"code\": \"awesomecoupon\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/cart/applycoupon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cart",
+						"applycoupon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para checkout y registro de compra",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTUyYzk5OTczMjBiMzc0ZjVjOTExMyIsImlhdCI6MTcxNjg1ODAxMCwiZXhwIjoxNzE5NDUwMDEwfQ.XXmjh7THjh2cP4MstlDFm_p-KM7QhoJnUmekReRjqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"66552aa6f43e1cac8f88a7c2\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/checkout/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"checkout",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api para obtener historial de compras",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTUyYzk5OTczMjBiMzc0ZjVjOTExMyIsImlhdCI6MTcxNjg1ODAxMCwiZXhwIjoxNzE5NDUwMDEwfQ.XXmjh7THjh2cP4MstlDFm_p-KM7QhoJnUmekReRjqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"66552aa6f43e1cac8f88a7c2\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/purchases/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"purchases",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

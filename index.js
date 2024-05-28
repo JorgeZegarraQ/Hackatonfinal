@@ -21,16 +21,14 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Rutas
 const cartRoutes = require('./routes/cart.routes');
-// const couponRoutes = require('./routes/coupon.routes');
-// const paymentRoutes = require('./routes/payment.routes');
+const checkoutRoutes = require('./routes/checkout.routes');
 const productsRoutes = require('./routes/products.routes');
-// const transactionsRoutes = require('./routes/transactions.routes');
+const purchasesRoutes = require('./routes/purchases.routes');
 const usersRoutes = require('./routes/users.routes');
 app.use('/api/cart', cartRoutes);
-// app.use('/api/coupon', couponRoutes);
-// app.use('/api/payment', paymentRoutes);
+app.use('/api/checkout', checkoutRoutes);
 app.use('/api/products', productsRoutes);
-// app.use('/api/transactions', transactionsRoutes);
+app.use('/api/purchases', purchasesRoutes);
 app.use('/api/users', usersRoutes);
 
 app.listen(port, () => {
