@@ -4,7 +4,7 @@ $(function () {
     var passwordfield = $("input[name=password]");
     $('button[type="submit"]').click(function (e) {
         e.preventDefault();
-        
+
         // check username
         if (textfield.val() != "" && passwordfield.val() != "") {
             const xhr = new XMLHttpRequest();
@@ -37,7 +37,6 @@ $(function () {
             //remove success mesage replaced with error message
             alert("Please enter a username and password")
         }
-        //console.log(textfield.val());
 
     });
 });

@@ -1,6 +1,4 @@
-/**
- * Created by sonu on 11/7/17.
- */
+
 $(function () {
     var textfield = $("input[name=user]");
     var passwordfield = $("input[name=password]");
